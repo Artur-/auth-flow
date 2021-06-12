@@ -2,27 +2,26 @@ package com.example.application.views.main;
 
 import java.util.Optional;
 
+import com.example.application.data.entity.User;
+import com.example.application.security.AuthenticatedUser;
+import com.example.application.views.priv.PrivateView;
+import com.example.application.views.pub.PublicView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
-import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
-import com.example.application.views.main.MainView;
-import com.example.application.views.pub.PublicView;
-import com.example.application.views.priv.PrivateView;
+import com.vaadin.flow.router.RouterLink;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -31,8 +30,10 @@ public class MainView extends AppLayout {
 
     private final Tabs menu;
     private H1 viewTitle;
+    private AuthenticatedUser authenticatedUser;
 
-    public MainView() {
+    public MainView(AuthenticatedUser authenticatedUser) {
+        this.authenticatedUser = authenticatedUser;
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
@@ -49,7 +50,18 @@ public class MainView extends AppLayout {
         layout.add(new DrawerToggle());
         viewTitle = new H1();
         layout.add(viewTitle);
-        layout.add(new Avatar());
+
+        Optional<User> maybeUser = authenticatedUser.get();
+        if (maybeUser.isPresent()) {
+            User user = maybeUser.get();
+            Avatar avatar = new Avatar(user.getName(), user.getProfilePictureUrl());
+            ContextMenu userMenu = new ContextMenu(avatar);
+            userMenu.setOpenOnClick(true);
+            userMenu.addItem("Logout", e -> {
+                authenticatedUser.logout();
+            });
+            layout.add(avatar);
+        }
         return layout;
     }
 
