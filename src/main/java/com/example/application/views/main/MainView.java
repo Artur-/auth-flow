@@ -21,8 +21,8 @@ import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
 import com.example.application.views.main.MainView;
-import com.example.application.views.public.PublicView;
-import com.example.application.views.private.PrivateView;
+import com.example.application.views.pub.PublicView;
+import com.example.application.views.priv.PrivateView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -80,10 +80,7 @@ public class MainView extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[] {
-            createTab("Public", PublicView.class),
-            createTab("Private", PrivateView.class)
-        };
+        return new Tab[] { createTab("Public", PublicView.class), createTab("Private", PrivateView.class) };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
@@ -101,9 +98,7 @@ public class MainView extends AppLayout {
     }
 
     private Optional<Tab> getTabForComponent(Component component) {
-        return menu.getChildren()
-                .filter(tab -> ComponentUtil.getData(tab, Class.class)
-                        .equals(component.getClass()))
+        return menu.getChildren().filter(tab -> ComponentUtil.getData(tab, Class.class).equals(component.getClass()))
                 .findFirst().map(Tab.class::cast);
     }
 
