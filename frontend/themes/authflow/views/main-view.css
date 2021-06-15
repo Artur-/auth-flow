@@ -2,11 +2,11 @@
   height: var(--lumo-size-xl);
   box-shadow: var(--lumo-box-shadow-s);
 }
-.sidemenu-header vaadin-avatar {
+.sidemenu-header .user {
   margin-left: auto;
   margin-right: var(--lumo-space-m);
 }
-vaadin-app-layout[dir='rtl'] .sidemenu-header vaadin-avatar {
+vaadin-app-layout[dir='rtl'] .sidemenu-header .user {
   margin-left: var(--lumo-space-m);
   margin-right: auto;
 }

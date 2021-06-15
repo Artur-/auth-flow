@@ -12,6 +12,7 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -55,12 +56,17 @@ public class MainView extends AppLayout {
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
             Avatar avatar = new Avatar(user.getName(), user.getProfilePictureUrl());
+            avatar.setClassName("user");
             ContextMenu userMenu = new ContextMenu(avatar);
             userMenu.setOpenOnClick(true);
             userMenu.addItem("Logout", e -> {
                 authenticatedUser.logout();
             });
             layout.add(avatar);
+        } else {
+            Anchor loginLink = new Anchor("login", "Sign in");
+            loginLink.setClassName("user");
+            layout.add(loginLink);
         }
         return layout;
     }
