@@ -87,7 +87,7 @@ public class JwtSplitCookieUtils {
             JWSSigner signer = new DefaultJWSSignerFactory()
                     .createJWSSigner(jwk, jwsAlgorithm);
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                    .subject(authentication.getName()).issuer("statelessapp")
+                    .subject(authentication.getName()).issuer("myapp")
                     .issueTime(now)
                     .expirationTime(new Date(now.getTime() + EXPIRES_IN * 1000))
                     .claim("scope", scope).build();

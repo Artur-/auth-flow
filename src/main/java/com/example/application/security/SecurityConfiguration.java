@@ -38,7 +38,7 @@ public class SecurityConfiguration extends VaadinJwtWebSecurityConfig {
             .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        setJwtSplitCookieAuthentication(http, "statelessapp", 3600,
+        setJwtSplitCookieAuthentication(http, "myapp", 3600,
                 JWSAlgorithm.HS256);
 
         setLoginView(http, LoginView.class, LOGOUT_URL);

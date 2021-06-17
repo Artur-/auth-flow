@@ -23,7 +23,7 @@ import org.springframework.security.web.context.SecurityContextPersistenceFilter
 import com.example.application.security.jwt.auth.JwtSplitCookieBearerTokenConverterFilter;
 import com.example.application.security.jwt.auth.JwtSplitCookieManagementFilter;
 import com.example.application.security.jwt.auth.JwtSplitCookieUtils;
-import com.example.application.security.jwt.auth.VaadinStatelessSavedRequestAwareAuthenticationSuccessHandler;
+import com.example.application.security.jwt.auth.VaadinJwtSavedRequestAwareAuthenticationSuccessHandler;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.spring.security.VaadinWebSecurityConfigurerAdapter;
 
@@ -46,7 +46,7 @@ public class VaadinJwtWebSecurityConfig
     protected void setLoginView(HttpSecurity http, Class<? extends Component> flowLoginView, String logoutUrl)
             throws Exception {
         super.setLoginView(http, flowLoginView, logoutUrl);
-        http.formLogin().successHandler(new VaadinStatelessSavedRequestAwareAuthenticationSuccessHandler());
+        http.formLogin().successHandler(new VaadinJwtSavedRequestAwareAuthenticationSuccessHandler());
     }
 
     @Bean

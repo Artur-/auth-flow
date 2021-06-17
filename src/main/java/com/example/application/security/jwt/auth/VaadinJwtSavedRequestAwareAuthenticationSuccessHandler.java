@@ -10,7 +10,7 @@ import com.vaadin.flow.spring.security.VaadinSavedRequestAwareAuthenticationSucc
 
 import org.springframework.security.core.Authentication;
 
-public class VaadinStatelessSavedRequestAwareAuthenticationSuccessHandler extends VaadinSavedRequestAwareAuthenticationSuccessHandler {
+public class VaadinJwtSavedRequestAwareAuthenticationSuccessHandler extends VaadinSavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
