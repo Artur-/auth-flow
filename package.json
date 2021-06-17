@@ -161,6 +161,6 @@
       "workbox-webpack-plugin": "6.1.0",
       "fork-ts-checker-webpack-plugin": "6.2.1"
     },
-    "hash": "ab1dc24d88d5ff32d6cbb223121d0b84eaecf5d8e604569f9fb7cbbd5a379eb6"
+    "hash": "6a2cb327573079c26fcb8b06054adf719d308cf4acb51f76b5ee30ac71a0f918"
   }
 }
